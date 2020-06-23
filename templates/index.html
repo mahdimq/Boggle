@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- <h1>BOGGLE Index Route</h1> -->
 
-<form method="GET" id="form">
-  <input type="text" placeholder="guess word" id="word" name="word">
-  <button class='submit'>submit</button>
+<form method="GET" class="input-item" id="form">
+  <div class="item">
+    <input type="text" placeholder="guess word" id="word" name="word">
+    <button class='submit'>submit</button>
+  </div>
 </form>
-</br>
-<p class="message"></p>
 
-<ul id="list"><strong>Words Found</strong></ul>
+<div class="small-words">
+  <p class="message"></p>
+  <ul id="list">Words Found</ul>
+</div>
+
 {% endblock %}

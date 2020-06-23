@@ -4,36 +4,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
   <link rel="stylesheet" href="/static/app.css" />
   <title>Boggle</title>
 </head>
 
 <body>
-  <main class="container is-fluid">
-    <section class="section" id='boggle'>
-      <h1 class="title">Boggle Game</h1>
-      <p>Time Left: <span id="timer">10</span></p>
-      <h3>Score: <span class="score">0</span></h3>
+  <main class="container" id='boggle'>
+    <h1 class="title">Boggle Game</h1>
+    <div class="row">
+      <div class="col">
+        <p>Time Left: <span id="timer">10</span></p>
+        <p class="highscore">High Score: {{ highscore }}</p>
+        <p>Score: <span class="score">0</span></p>
 
-      <h4>High Score: {{ highscore }}</h4>
+        <div class="col info">
+          <div class="large-words">
+            <p class="message"></p>
+            <ul id="list">Words Found</ul>
+          </div>
+        </div>
 
-      <div class="table-container">
-        <table class="table is-bordered">
+      </div>
+
+      <div class="col">
+        <table class="board">
           <tbody>
             {% for i in board %}
             <tr>
               {% for letters in i %}
-              <td id="square" class="is-size-4">{{letters}}</td>
+              <td class="square">{{letters}}</td>
               {% endfor %}
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
+    </div>
 
-      {% block content %}{% endblock %}
-    </section>
+    {% block content %}{% endblock %}
+
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>

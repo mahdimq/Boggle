@@ -1,5 +1,5 @@
 class BoggleGame {
-	constructor(boardId, time = 10) {
+	constructor(boardId, time = 60) {
 		this.board = $(`#${boardId}`) //<-- create ID for the game(board)
 		this.word_list = new Set() //<-- create set so store UNIQUE values
 		this.score = 0 //<-- assign initial score to 0
