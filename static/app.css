@@ -1,0 +1,43 @@
+#square {
+	border: solid red 1px;
+	margin: 1em;
+}
+
+table {
+	margin: 1em;
+}
+
+input {
+	padding: 0.5em;
+	width: 250px;
+}
+
+button {
+	padding: 0.6em 1em;
+	cursor: pointer;
+	transition: all ease 100ms;
+	border: black solid 1px;
+	border-radius: 3px;
+}
+
+button:hover {
+	background-color: #c5c4c4;
+	transition: all ease 100ms;
+}
+
+.add {
+	color: #4ebde9;
+}
+
+.pass {
+	color: green;
+}
+
+.fail {
+	color: red;
+}
+
+.new {
+	color: turquoise;
+	font-weight: bold;
+}
