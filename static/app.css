@@ -11,9 +11,6 @@
 .large-words {
 	display: none;
 }
-.small-words {
-	display: block;
-}
 
 .title {
 	padding: 0.5em;
@@ -58,7 +55,7 @@ p {
 	font-size: 1em;
 }
 
-#list {
+.list {
 	text-align: center;
 	list-style: none;
 	font-size: 1em;
@@ -66,6 +63,7 @@ p {
 	margin: 0.5em auto;
 	font-weight: bold;
 	text-transform: uppercase;
+	display: block;
 }
 
 li {
@@ -179,9 +177,11 @@ button:hover {
 		margin: 1em;
 		align-content: space-between;
 	}
+
 	.small-words {
 		display: none;
 	}
+
 	.info {
 		justify-content: center;
 		align-items: center;

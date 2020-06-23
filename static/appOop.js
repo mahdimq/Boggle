@@ -16,6 +16,7 @@ class BoggleGame {
 		let selectedWord = $('#word').val() //<--retrieve value from input
 
 		if (!selectedWord) return //<-- if no input, return
+		console.log(selectedWord)
 
 		// CHECK IS WORD IS ALREADY PRESENT IN THE LIST USING SET
 		if (this.word_list.has(selectedWord)) {
@@ -41,7 +42,7 @@ class BoggleGame {
 
 	// APPENDS WORDS TO THE LIST
 	populateList(word) {
-		$('#list', this.board).append($(`<li>${word}</li>`))
+		$('.list', this.board).append($(`<li>${word}</li>`))
 	}
 	// DISPLAYS MESSAGE TO USER ON THE DOM
 	showMessage(msg, cls) {
@@ -73,7 +74,6 @@ class BoggleGame {
 	async endGame() {
 		$('#form', this.board).hide() //<-- Hides the form
 		$('#list', this.board).hide() //<-- Hides the word list
-		console.log('HIGHSCORE', this.score)
 		const response = await axios.post('/get-score', { score: this.score })
 		if (response.data.topScore) {
 			this.showMessage(`New High Score: ${this.score}`, 'new')
