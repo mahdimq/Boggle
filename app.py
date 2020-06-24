@@ -1,14 +1,11 @@
 from boggle import Boggle
-from flask import Flask, render_template, session, request, redirect, jsonify
-from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask, render_template, session, request, jsonify
 
 app = Flask(__name__)
 # the toolbar is only enabled in debug mode:
-app.debug = True
 
 # set a 'SECRET_KEY' to enable the Flask session cookies
 app.config['SECRET_KEY'] = 'abc123'
-toolbar = DebugToolbarExtension(app)
 
 # runs the method from Boggle import
 boggle_game = Boggle()
@@ -32,13 +29,13 @@ def check_answer():
     board = session['board']
     """checks validity of word"""
     answer = boggle_game.check_valid_word(board, word)
-    return jsonify({"result": answer})
+    return jsonify({'result': answer})
 
 
 @app.route("/get-score", methods=["POST"])
 def get_score():
     """returns score value from server as json"""
-    score = request.json["score"]
+    score = int(request.json["score"])
     highscore = session.get('highscore', 0)
     """posts score or highest score"""
     session['highscore'] = max(score, highscore)
