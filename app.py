@@ -2,7 +2,6 @@ from boggle import Boggle
 from flask import Flask, render_template, session, request, jsonify
 
 app = Flask(__name__)
-# the toolbar is only enabled in debug mode:
 
 # set a 'SECRET_KEY' to enable the Flask session cookies
 app.config['SECRET_KEY'] = 'abc123'
