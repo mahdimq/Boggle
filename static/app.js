@@ -1,11 +1,11 @@
-const $list = $('#list') //<-- create list element
+const $list = $('.list') //<-- create list element
 const $form = $('#form') //<-- get form element from html
 const $timer = $('#timer') //<-- assign timer variable
 const word_list = new Set() //<-- create set so store UNIQUE values
 let score = 0 //<-- assign intial score as 0
 
-$form.on('submit', handleSubmit)
-timer(10)
+$form.on('submit', handleSubmit) //<-- starts game
+timer(60) //<-- begins timer of 60 seconds
 
 // HANDLES FORM SUBMISSION
 async function handleSubmit(e) {
@@ -57,14 +57,15 @@ function showTimer(time) {
 
 // GAME TIMER
 async function timer(time = 60) {
+	$('.btn').hide()
 	const id = setInterval(() => {
 		time -= 1
 		showTimer(time)
 		if (time === 0) {
 			clearInterval(id)
+			finalScore()
 		}
 	}, 1000)
-	finalScore()
 }
 
 // CALCULATING INCREMENTING SCORE
@@ -74,10 +75,11 @@ function showScore() {
 
 // CALCULATING FINAL SCORE
 async function finalScore() {
-	console.log('HIGHSCORE', score)
+	$('.btn').show() //<-- displays play again btn on DOM
+	$('#form').hide() //<-- hides form when game over
+	$('.list').hide() //<-- hides list when game over
 	const response = await axios.post('/get-score', { score: score })
 	if (response.data.topScore) {
-		console.log(response.data.topScore)
 		showMessage(`New High Score: ${score}`, 'new')
 	} else {
 		showMessage(`Final Score: ${score}`, 'pass')

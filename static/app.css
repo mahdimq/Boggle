@@ -104,6 +104,11 @@ button {
 	background-color: #ffcec5;
 }
 
+.btn {
+	margin: 1em auto;
+	display: block;
+}
+
 button:hover {
 	background-color: #ffa494;
 }

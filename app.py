@@ -10,36 +10,36 @@ app.debug = True
 app.config['SECRET_KEY'] = 'abc123'
 toolbar = DebugToolbarExtension(app)
 
+# runs the method from Boggle import
 boggle_game = Boggle()
 
 
 @app.route("/")
 def show_home():
+    """renders homepage template and starts session"""
     board = boggle_game.make_board()
     session['board'] = board
     highscore = session.get("highscore", 0)
-    # num_plays = session.get("num_plays", 0)
     return render_template('index.html',
                            board=board,
-                           #    num_plays=num_plays,
                            highscore=highscore)
 
 
 @app.route("/check-answer")
 def check_answer():
+    """gets words from form and send to server as json"""
     word = request.args['word']
     board = session['board']
+    """checks validity of word"""
     answer = boggle_game.check_valid_word(board, word)
-    # print('answer', answer)
     return jsonify({"result": answer})
 
 
 @app.route("/get-score", methods=["POST"])
 def get_score():
-    score = request.json["score"]  # <-- ASK TA ABOUT THIS
-    # print('score', score)
+    """returns score value from server as json"""
+    score = request.json["score"]
     highscore = session.get('highscore', 0)
-    # num_plays = session.get('num_plays', 0)
-    # session['num_plays'] = num_plays + 1
+    """posts score or highest score"""
     session['highscore'] = max(score, highscore)
     return jsonify(topScore=score > highscore)

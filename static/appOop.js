@@ -6,7 +6,7 @@ class BoggleGame {
 		this.time = time //<-- dynamic timer for game
 		this.setTimer() //<-- run the timer
 
-		// bind the handsubmit function to the class
+		// bind the handleSubmit function to the class
 		$('#form', this.board).on('submit', this.handleSubmit.bind(this))
 	}
 
@@ -16,9 +16,8 @@ class BoggleGame {
 		let selectedWord = $('#word').val() //<--retrieve value from input
 
 		if (!selectedWord) return //<-- if no input, return
-		console.log(selectedWord)
 
-		// CHECK IS WORD IS ALREADY PRESENT IN THE LIST USING SET
+		// CHECK IF WORD IS ALREADY PRESENT IN THE LIST USING SET
 		if (this.word_list.has(selectedWord)) {
 			this.showMessage(`${selectedWord} has already been found`, 'fail')
 			return
@@ -59,6 +58,7 @@ class BoggleGame {
 
 	// SETS THE GAME TIMER
 	setTimer() {
+		$('.btn', this.board).hide() //<-- Hides play again button
 		let timerId = setInterval(() => {
 			this.time = this.time - 1 //<-- Decrements time by 1 second
 			this.showTimer() //<-- display timer decrementing
@@ -73,7 +73,8 @@ class BoggleGame {
 	// END OF GAME FUNCTION
 	async endGame() {
 		$('#form', this.board).hide() //<-- Hides the form
-		$('#list', this.board).hide() //<-- Hides the word list
+		$('.list', this.board).hide() //<-- Hides the word list
+		$('.btn', this.board).show() //<-- Shows the play again button
 		const response = await axios.post('/get-score', { score: this.score })
 		if (response.data.topScore) {
 			this.showMessage(`New High Score: ${this.score}`, 'new')
